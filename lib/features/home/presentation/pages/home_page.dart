@@ -1,7 +1,9 @@
+import 'package:eden_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/widgets/settings_bottom_sheet.dart';
 import '../../data/models/plant_model.dart';
 import '../providers/home_provider.dart';
 
@@ -10,6 +12,7 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context)!;
     final recentlyIdentifiedAsync = ref.watch(recentlyIdentifiedProvider);
     final trendingAsync = ref.watch(trendingPlantsProvider);
 
@@ -37,15 +40,33 @@ class HomePage extends ConsumerWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Salam,", style: AppTextStyles.bodyMedium),
-                          Text("Yacine 🌿", style: AppTextStyles.h2),
+                          Text(l10n.greeting, style: AppTextStyles.bodyMedium),
+                          Text(l10n.userName, style: AppTextStyles.h2),
                         ],
                       ),
                     ],
                   ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.notifications_outlined, size: 28),
+                  Row(
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            backgroundColor: Colors.transparent,
+                            builder: (context) => const SettingsBottomSheet(),
+                          );
+                        },
+                        icon: const Icon(Icons.settings_outlined, size: 26),
+                      ),
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.notifications_outlined,
+                          size: 28,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -55,7 +76,7 @@ class HomePage extends ConsumerWidget {
               // Search Bar
               TextField(
                 decoration: InputDecoration(
-                  hintText: "Search for Algerian plants...",
+                  hintText: l10n.searchPlaceholder,
                   prefixIcon: const Icon(Icons.search),
                   suffixIcon: Container(
                     padding: const EdgeInsets.all(8),
@@ -79,11 +100,11 @@ class HomePage extends ConsumerWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Recently Identified", style: AppTextStyles.h3),
+                  Text(l10n.recentlyIdentified, style: AppTextStyles.h3),
                   TextButton(
                     onPressed: () {},
                     child: Text(
-                      "See All",
+                      l10n.seeAll,
                       style: AppTextStyles.bodyMedium.copyWith(
                         color: AppColors.secondary,
                       ),
@@ -104,10 +125,10 @@ class HomePage extends ConsumerWidget {
                       final plant = plants[index];
                       // Provide different time labels based on index for demo
                       final timeLabel = index == 0
-                          ? "Today"
+                          ? l10n.today
                           : index == 1
-                          ? "Yesterday"
-                          : "2d ago";
+                          ? l10n.yesterday
+                          : l10n.daysAgo(2);
                       return _PlantCard(plant: plant, time: timeLabel);
                     },
                   ),
@@ -123,7 +144,7 @@ class HomePage extends ConsumerWidget {
               Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: AppColors.accent.withOpacity(0.5),
+                  color: AppColors.accent.withValues(alpha: 0.5),
                   borderRadius: BorderRadius.circular(24),
                 ),
                 child: Row(
@@ -145,10 +166,10 @@ class HomePage extends ConsumerWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Did you know?", style: AppTextStyles.h3),
+                          Text(l10n.didYouKnow, style: AppTextStyles.h3),
                           const SizedBox(height: 8),
                           Text(
-                            "Algeria has over 3,150 plant species. The Tell Atlas region is a biodiversity hotspot containing many endemic species found nowhere else on Earth.",
+                            l10n.didYouKnowText,
                             style: AppTextStyles.bodyMedium.copyWith(
                               color: AppColors.primary,
                             ),
@@ -163,7 +184,7 @@ class HomePage extends ConsumerWidget {
               const SizedBox(height: 32),
 
               // Trending in Algeria Section
-              Text("Trending in Algeria", style: AppTextStyles.h3),
+              Text(l10n.trendingInAlgeria, style: AppTextStyles.h3),
               const SizedBox(height: 16),
               trendingAsync.when(
                 data: (plants) => ListView.separated(
@@ -192,7 +213,7 @@ class HomePage extends ConsumerWidget {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 10,
               offset: const Offset(0, -5),
             ),
@@ -203,13 +224,13 @@ class HomePage extends ConsumerWidget {
           children: [
             _BottomNavItem(
               icon: Icons.home,
-              label: "Home",
+              label: l10n.navHome,
               isActive: true,
               color: AppColors.secondary,
             ),
             _BottomNavItem(
               icon: Icons.local_hospital_outlined,
-              label: "Diseases",
+              label: l10n.navDiseases,
             ),
 
             // Scan Button (Floating style) - Bigger
@@ -221,7 +242,7 @@ class HomePage extends ConsumerWidget {
                 color: AppColors.secondary,
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.secondary.withOpacity(0.4),
+                    color: AppColors.secondary.withValues(alpha: 0.4),
                     blurRadius: 16,
                     offset: const Offset(0, 8),
                   ),
@@ -236,8 +257,8 @@ class HomePage extends ConsumerWidget {
               ),
             ),
 
-            _BottomNavItem(icon: Icons.eco_outlined, label: "My Garden"),
-            _BottomNavItem(icon: Icons.quiz_outlined, label: "Quiz"),
+            _BottomNavItem(icon: Icons.eco_outlined, label: l10n.navMyGarden),
+            _BottomNavItem(icon: Icons.quiz_outlined, label: l10n.navQuiz),
           ],
         ),
       ),
@@ -295,7 +316,7 @@ class _PlantCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -329,7 +350,7 @@ class _PlantCard extends StatelessWidget {
                     vertical: 4,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.6),
+                    color: Colors.black.withValues(alpha: 0.6),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Text(
@@ -366,13 +387,15 @@ class _TrendingPlantCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -447,7 +470,7 @@ class _TrendingPlantCard extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "Read Guide",
+                        l10n.readGuide,
                         style: TextStyle(
                           color: AppColors.secondary,
                           fontWeight: FontWeight.bold,

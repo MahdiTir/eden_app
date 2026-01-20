@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:eden_app/l10n/app_localizations.dart';
 import '../../../../core/providers/storage_provider.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
@@ -17,29 +17,8 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
   final PageController _controller = PageController();
   int _currentPage = 0;
 
-  final List<OnboardingContent> _contents = const [
-    OnboardingContent(
-      title: "Discover Algeria's Flora",
-      description:
-          "Instantly recognize local plants. Point your camera at any flower or tree to unlock the secrets of nature.",
-      image: "assets/images/onboarding_1.png", // Placeholder
-    ),
-    OnboardingContent(
-      title: "Know Your Plants Inside Out",
-      description:
-          "Access detailed botanical data on local Algerian flora and instantly detect potential diseases.",
-      image: "assets/images/onboarding_2.png", // Placeholder
-    ),
-    OnboardingContent(
-      title: "Play & Learn Anywhere",
-      description:
-          "Test your knowledge with fun quizzes and identify plants in the deepest Sahara without internet.",
-      image: "assets/images/onboarding_3.png", // Placeholder
-    ),
-  ];
-
-  void _nextPage() {
-    if (_currentPage < _contents.length - 1) {
+  void _nextPage(BuildContext context, int totalPages) {
+    if (_currentPage < totalPages - 1) {
       _controller.nextPage(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
@@ -56,6 +35,25 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
+    final List<OnboardingContent> contents = [
+      OnboardingContent(
+        title: "${l10n.onboardingTitle1}\n${l10n.onboardingTitle1Highlight}",
+        description: l10n.onboardingDesc1,
+        image: "assets/images/onboarding_1.png",
+      ),
+      OnboardingContent(
+        title: l10n.onboardingTitle2,
+        description: l10n.onboardingDesc2,
+        image: "assets/images/onboarding_2.png",
+      ),
+      OnboardingContent(
+        title: l10n.onboardingTitle3,
+        description: l10n.onboardingDesc3,
+        image: "assets/images/onboarding_3.png",
+      ),
+    ];
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
@@ -63,17 +61,21 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
           children: [
             Align(
               alignment: Alignment.topRight,
-              child: TextButton(
-                onPressed: () {
-                  ref
-                      .read(sharedPreferencesProvider)
-                      .setBool(StorageKeys.onboardingSeen, true);
-                  context.go('/home');
-                },
-                child: Text(
-                  "Skip",
-                  style: AppTextStyles.bodyMedium.copyWith(
-                    fontWeight: FontWeight.bold,
+              child: Padding(
+                padding: const EdgeInsets.only(right: 8.0, top: 0.0),
+                child: TextButton(
+                  onPressed: () {
+                    ref
+                        .read(sharedPreferencesProvider)
+                        .setBool(StorageKeys.onboardingSeen, true);
+                    context.go('/home');
+                  },
+                  child: Text(
+                    l10n.skip,
+                    style: AppTextStyles.bodyMedium.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.textPrimary,
+                    ),
                   ),
                 ),
               ),
@@ -86,9 +88,9 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                     _currentPage = index;
                   });
                 },
-                itemCount: _contents.length,
+                itemCount: contents.length,
                 itemBuilder: (context, index) {
-                  return _OnboardingStep(content: _contents[index]);
+                  return _OnboardingStep(content: contents[index]);
                 },
               ),
             ),
@@ -99,7 +101,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(
-                      _contents.length,
+                      contents.length,
                       (index) => Container(
                         margin: const EdgeInsets.symmetric(horizontal: 4),
                         width: _currentPage == index ? 24 : 8,
@@ -107,7 +109,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                         decoration: BoxDecoration(
                           color: _currentPage == index
                               ? AppColors.secondary
-                              : AppColors.secondary.withOpacity(0.3),
+                              : AppColors.secondary.withValues(alpha: 0.3),
                           borderRadius: BorderRadius.circular(4),
                         ),
                       ),
@@ -117,11 +119,11 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: _nextPage,
+                      onPressed: () => _nextPage(context, contents.length),
                       child: Text(
-                        _currentPage == _contents.length - 1
-                            ? "Get Started"
-                            : "Next",
+                        _currentPage == contents.length - 1
+                            ? l10n.getStarted
+                            : l10n.next,
                       ),
                     ),
                   ),
@@ -142,42 +144,64 @@ class _OnboardingStep extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          // Image placeholder container
-          AspectRatio(
-            aspectRatio: 1,
-            child: Container(
-              margin: const EdgeInsets.only(bottom: 40),
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-                borderRadius: BorderRadius.circular(24),
-                image: DecorationImage(
-                  image: AssetImage(content.image),
-                  fit: BoxFit.contain,
-                ),
+    final parts = content.title.split('\n');
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        // Maximize image space using Expanded while keeping the original proportions
+        Expanded(
+          flex: 3,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            width: double.infinity,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(content.image),
+                fit: BoxFit.contain, // Best fit without cropping
               ),
-              // child: const Center(child: Icon(Icons.image, size: 64, color: Colors.grey)),
             ),
           ),
-          Text(
-            content.title,
-            style: AppTextStyles.h1.copyWith(
-              fontSize: 28,
-            ), // Slightly smaller for mobile
-            textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 24),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          child: Column(
+            children: [
+              RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: parts[0] + (parts.length > 1 ? '\n' : ''),
+                      style: AppTextStyles.h1.copyWith(
+                        fontSize: 26,
+                        height: 1.2,
+                      ),
+                    ),
+                    if (parts.length > 1)
+                      TextSpan(
+                        text: parts[1],
+                        style: AppTextStyles.h1.copyWith(
+                          fontSize: 34,
+                          color: AppColors.secondary,
+                          fontWeight: FontWeight.w900,
+                          height: 1.2,
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                content.description,
+                style: AppTextStyles.bodyMedium,
+                textAlign: TextAlign.center,
+              ),
+            ],
           ),
-          const SizedBox(height: 16),
-          Text(
-            content.description,
-            style: AppTextStyles.bodyMedium,
-            textAlign: TextAlign.center,
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

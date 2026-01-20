@@ -1,0 +1,203 @@
+{
+  "@@locale": "en",
+  
+  "appTitle": "EDEN - Algerian Plant Intelligence",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+
+  "appName": "EDEN",
+  "@appName": {
+    "description": "App name displayed on splash screen"
+  },
+
+  "appTagline": "Algerian Plant Intelligence",
+  "@appTagline": {
+    "description": "App tagline on splash screen"
+  },
+
+  "splashLoading": "Initializing flora database...",
+  "@splashLoading": {
+    "description": "Loading message on splash screen"
+  },
+
+  "splashFooter": "Powered by AI & Nature",
+  "@splashFooter": {
+    "description": "Footer text on splash screen"
+  },
+
+  "skip": "Skip",
+  "@skip": {
+    "description": "Skip button on onboarding"
+  },
+
+  "onboardingTitle1": "Discover Algeria's",
+  "@onboardingTitle1": {
+    "description": "First part of onboarding page 1 title"
+  },
+
+  "onboardingTitle1Highlight": "Flora",
+  "@onboardingTitle1Highlight": {
+    "description": "Highlighted word (Flora) in onboarding page 1 title"
+  },
+
+  "onboardingDesc1": "Instantly recognize local plants. Point your camera at any flower or tree to unlock the secrets of nature.",
+  "@onboardingDesc1": {
+    "description": "Description for onboarding page 1"
+  },
+
+  "onboardingTitle2": "Know Your Plants Inside Out",
+  "@onboardingTitle2": {
+    "description": "Title for onboarding page 2"
+  },
+
+  "onboardingDesc2": "Access detailed botanical data on local Algerian flora and instantly detect potential diseases.",
+  "@onboardingDesc2": {
+    "description": "Description for onboarding page 2"
+  },
+
+  "onboardingTitle3": "Play & Learn Anywhere",
+  "@onboardingTitle3": {
+    "description": "Title for onboarding page 3"
+  },
+
+  "onboardingDesc3": "Test your knowledge with fun quizzes and identify plants in the deepest Sahara without internet.",
+  "@onboardingDesc3": {
+    "description": "Description for onboarding page 3"
+  },
+
+  "getStarted": "Get Started",
+  "@getStarted": {
+    "description": "Get started button on last onboarding page"
+  },
+
+  "next": "Next",
+  "@next": {
+    "description": "Next button on onboarding pages"
+  },
+
+  "greeting": "Salam,",
+  "@greeting": {
+    "description": "Greeting on home page"
+  },
+
+  "userName": "Yacine 🌿",
+  "@userName": {
+    "description": "User name on home page"
+  },
+
+  "searchPlaceholder": "Search for Algerian plants...",
+  "@searchPlaceholder": {
+    "description": "Search bar placeholder text"
+  },
+
+  "recentlyIdentified": "Recently Identified",
+  "@recentlyIdentified": {
+    "description": "Recently identified section title"
+  },
+
+  "seeAll": "See All",
+  "@seeAll": {
+    "description": "See all button"
+  },
+
+  "today": "Today",
+  "@today": {
+    "description": "Time label for today"
+  },
+
+  "yesterday": "Yesterday",
+  "@yesterday": {
+    "description": "Time label for yesterday"
+  },
+
+  "daysAgo": "{count}d ago",
+  "@daysAgo": {
+    "description": "Time label for days ago",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+
+  "didYouKnow": "Did you know?",
+  "@didYouKnow": {
+    "description": "Did you know section title"
+  },
+
+  "didYouKnowText": "Algeria has over 3,150 plant species. The Tell Atlas region is a biodiversity hotspot containing many endemic species found nowhere else on Earth.",
+  "@didYouKnowText": {
+    "description": "Did you know section content"
+  },
+
+  "trendingInAlgeria": "Trending in Algeria",
+  "@trendingInAlgeria": {
+    "description": "Trending section title"
+  },
+
+  "readGuide": "Read Guide",
+  "@readGuide": {
+    "description": "Read guide button text"
+  },
+
+  "navHome": "Home",
+  "@navHome": {
+    "description": "Bottom navigation home label"
+  },
+
+  "navDiseases": "Diseases",
+  "@navDiseases": {
+    "description": "Bottom navigation diseases label"
+  },
+
+  "navMyGarden": "My Garden",
+  "@navMyGarden": {
+    "description": "Bottom navigation my garden label"
+  },
+
+  "navQuiz": "Quiz",
+  "@navQuiz": {
+    "description": "Bottom navigation quiz label"
+  },
+
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings title"
+  },
+
+  "language": "Language",
+  "@language": {
+    "description": "Language setting label"
+  },
+
+  "languageEnglish": "English",
+  "@languageEnglish": {
+    "description": "English language name"
+  },
+
+  "languageFrench": "Français",
+  "@languageFrench": {
+    "description": "French language name"
+  },
+
+  "languageArabic": "العربية",
+  "@languageArabic": {
+    "description": "Arabic language name"
+  },
+
+  "selectLanguage": "Select Language",
+  "@selectLanguage": {
+    "description": "Select language dialog title"
+  },
+
+  "error": "Error: {message}",
+  "@error": {
+    "description": "Error message template",
+    "placeholders": {
+      "message": {
+        "type": "String"
+      }
+    }
+  }
+}
