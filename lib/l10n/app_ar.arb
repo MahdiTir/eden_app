@@ -38,5 +38,21 @@
   "languageFrench": "Français",
   "languageArabic": "العربية",
   "selectLanguage": "اختر اللغة",
-  "error": "خطأ: {message}"
+  "error": "خطأ: {message}",
+  "login": "تسجيل الدخول",
+  "signUp": "إنشاء حساب",
+  "email": "البريد الإلكتروني",
+  "password": "كلمة المرور",
+  "forgotPassword": "نسيت كلمة المرور؟",
+  "dontHaveAccount": "ليس لديك حساب؟",
+  "alreadyHaveAccount": "عضو في إيدن؟",
+  "logout": "تسجيل الخروج",
+  "welcomeBack": "مرحباً بكم في",
+  "joinGarden": "انضم إلى الحديقة",
+  "discoverFlora": "اكتشف النباتات الجزائرية",
+  "fullName": "الاسم الكامل",
+  "confirmPassword": "تأكيد كلمة المرور",
+  "createAccount": "إنشاء حساب",
+  "orContinueWith": "أو تابع باستخدام",
+  "defaultUsername": "مستخدم"
 }

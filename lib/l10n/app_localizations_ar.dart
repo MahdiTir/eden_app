@@ -129,4 +129,52 @@ class AppLocalizationsAr extends AppLocalizations {
   String error(String message) {
     return 'خطأ: $message';
   }
+
+  @override
+  String get login => 'تسجيل الدخول';
+
+  @override
+  String get signUp => 'إنشاء حساب';
+
+  @override
+  String get email => 'البريد الإلكتروني';
+
+  @override
+  String get password => 'كلمة المرور';
+
+  @override
+  String get forgotPassword => 'نسيت كلمة المرور؟';
+
+  @override
+  String get dontHaveAccount => 'ليس لديك حساب؟';
+
+  @override
+  String get alreadyHaveAccount => 'عضو في إيدن؟';
+
+  @override
+  String get logout => 'تسجيل الخروج';
+
+  @override
+  String get welcomeBack => 'مرحباً بكم في';
+
+  @override
+  String get joinGarden => 'انضم إلى الحديقة';
+
+  @override
+  String get discoverFlora => 'اكتشف النباتات الجزائرية';
+
+  @override
+  String get fullName => 'الاسم الكامل';
+
+  @override
+  String get confirmPassword => 'تأكيد كلمة المرور';
+
+  @override
+  String get createAccount => 'إنشاء حساب';
+
+  @override
+  String get orContinueWith => 'أو تابع باستخدام';
+
+  @override
+  String get defaultUsername => 'مستخدم';
 }

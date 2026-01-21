@@ -129,4 +129,52 @@ class AppLocalizationsFr extends AppLocalizations {
   String error(String message) {
     return 'Erreur : $message';
   }
+
+  @override
+  String get login => 'Se connecter';
+
+  @override
+  String get signUp => 'S\'inscrire';
+
+  @override
+  String get email => 'Adresse E-mail';
+
+  @override
+  String get password => 'Mot de passe';
+
+  @override
+  String get forgotPassword => 'Mot de passe oublié ?';
+
+  @override
+  String get dontHaveAccount => 'Pas encore de compte ?';
+
+  @override
+  String get alreadyHaveAccount => 'Membre de EDEN ?';
+
+  @override
+  String get logout => 'Se déconnecter';
+
+  @override
+  String get welcomeBack => 'Bienvenue sur';
+
+  @override
+  String get joinGarden => 'Rejoignez le Jardin';
+
+  @override
+  String get discoverFlora => 'Découvrez la Flore Algérienne';
+
+  @override
+  String get fullName => 'Nom Complet';
+
+  @override
+  String get confirmPassword => 'Confirmer le mot de passe';
+
+  @override
+  String get createAccount => 'Créer un compte';
+
+  @override
+  String get orContinueWith => 'Ou continuer avec';
+
+  @override
+  String get defaultUsername => 'Utilisateur';
 }

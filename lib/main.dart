@@ -7,10 +7,18 @@ import 'core/providers/storage_provider.dart';
 import 'core/providers/locale_provider.dart';
 import 'core/router/app_router.dart';
 import 'core/theme/app_theme.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'core/config/supabase_config.dart';
 //import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Supabase.initialize(
+    url: SupabaseConfig.url,
+    anonKey: SupabaseConfig.anonKey,
+  );
+
   final sharedPreferences = await SharedPreferences.getInstance();
 
   runApp(

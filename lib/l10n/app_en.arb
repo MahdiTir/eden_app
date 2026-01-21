@@ -199,5 +199,38 @@
         "type": "String"
       }
     }
-  }
+  },
+  
+  "login": "Log In",
+  "@login": {},
+  "signUp": "Sign Up",
+  "@signUp": {},
+  "email": "Email Address",
+  "@email": {},
+  "password": "Password",
+  "@password": {},
+  "forgotPassword": "Forgot Password?",
+  "@forgotPassword": {},
+  "dontHaveAccount": "Don't have an account?",
+  "@dontHaveAccount": {},
+  "alreadyHaveAccount": "Member of EDEN?",
+  "@alreadyHaveAccount": {},
+  "logout": "Log Out",
+  "@logout": {},
+  "welcomeBack": "Welcome back to",
+  "@welcomeBack": {},
+  "joinGarden": "Join the Garden",
+  "@joinGarden": {},
+  "discoverFlora": "Discover Algeria's Flora",
+  "@discoverFlora": {},
+  "fullName": "Full Name",
+  "@fullName": {},
+  "confirmPassword": "Confirm Password",
+  "@confirmPassword": {},
+  "createAccount": "Create Account",
+  "@createAccount": {},
+  "orContinueWith": "Or continue with",
+  "@orContinueWith": {},
+  "defaultUsername": "User",
+  "@defaultUsername": {}
 }

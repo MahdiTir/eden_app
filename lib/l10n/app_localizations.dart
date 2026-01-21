@@ -327,6 +327,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Error: {message}'**
   String error(String message);
+
+  /// No description provided for @login.
+  ///
+  /// In en, this message translates to:
+  /// **'Log In'**
+  String get login;
+
+  /// No description provided for @signUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Up'**
+  String get signUp;
+
+  /// No description provided for @email.
+  ///
+  /// In en, this message translates to:
+  /// **'Email Address'**
+  String get email;
+
+  /// No description provided for @password.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get password;
+
+  /// No description provided for @forgotPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot Password?'**
+  String get forgotPassword;
+
+  /// No description provided for @dontHaveAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t have an account?'**
+  String get dontHaveAccount;
+
+  /// No description provided for @alreadyHaveAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Member of EDEN?'**
+  String get alreadyHaveAccount;
+
+  /// No description provided for @logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Log Out'**
+  String get logout;
+
+  /// No description provided for @welcomeBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome back to'**
+  String get welcomeBack;
+
+  /// No description provided for @joinGarden.
+  ///
+  /// In en, this message translates to:
+  /// **'Join the Garden'**
+  String get joinGarden;
+
+  /// No description provided for @discoverFlora.
+  ///
+  /// In en, this message translates to:
+  /// **'Discover Algeria\'s Flora'**
+  String get discoverFlora;
+
+  /// No description provided for @fullName.
+  ///
+  /// In en, this message translates to:
+  /// **'Full Name'**
+  String get fullName;
+
+  /// No description provided for @confirmPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Password'**
+  String get confirmPassword;
+
+  /// No description provided for @createAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Account'**
+  String get createAccount;
+
+  /// No description provided for @orContinueWith.
+  ///
+  /// In en, this message translates to:
+  /// **'Or continue with'**
+  String get orContinueWith;
+
+  /// No description provided for @defaultUsername.
+  ///
+  /// In en, this message translates to:
+  /// **'User'**
+  String get defaultUsername;
 }
 
 class _AppLocalizationsDelegate

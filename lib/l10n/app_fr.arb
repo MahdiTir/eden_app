@@ -38,5 +38,21 @@
   "languageFrench": "Français",
   "languageArabic": "العربية",
   "selectLanguage": "Sélectionner la Langue",
-  "error": "Erreur : {message}"
+  "error": "Erreur : {message}",
+  "login": "Se connecter",
+  "signUp": "S'inscrire",
+  "email": "Adresse E-mail",
+  "password": "Mot de passe",
+  "forgotPassword": "Mot de passe oublié ?",
+  "dontHaveAccount": "Pas encore de compte ?",
+  "alreadyHaveAccount": "Membre de EDEN ?",
+  "logout": "Se déconnecter",
+  "welcomeBack": "Bienvenue sur",
+  "joinGarden": "Rejoignez le Jardin",
+  "discoverFlora": "Découvrez la Flore Algérienne",
+  "fullName": "Nom Complet",
+  "confirmPassword": "Confirmer le mot de passe",
+  "createAccount": "Créer un compte",
+  "orContinueWith": "Ou continuer avec",
+  "defaultUsername": "Utilisateur"
 }

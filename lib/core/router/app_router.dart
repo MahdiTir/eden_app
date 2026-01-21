@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../features/onboarding/presentation/pages/onboarding_page.dart';
 import '../../features/home/presentation/pages/home_page.dart';
 import '../../features/splash/presentation/pages/splash_page.dart';
+import '../../features/auth/presentation/pages/login_page.dart';
+import '../../features/auth/presentation/pages/signup_page.dart';
 
 // Simple provider for the router
 final routerProvider = Provider<GoRouter>((ref) {
@@ -15,6 +17,8 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const OnboardingPage(),
       ),
       GoRoute(path: '/home', builder: (context, state) => const HomePage()),
+      GoRoute(path: '/login', builder: (context, state) => const LoginPage()),
+      GoRoute(path: '/signup', builder: (context, state) => const SignUpPage()),
     ],
   );
 });

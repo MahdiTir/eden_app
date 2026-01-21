@@ -1,10 +1,12 @@
 import 'package:eden_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/widgets/settings_bottom_sheet.dart';
 import '../../data/models/plant_model.dart';
+import '../../../auth/presentation/providers/auth_provider.dart';
 import '../providers/home_provider.dart';
 
 class HomePage extends ConsumerWidget {
@@ -15,6 +17,10 @@ class HomePage extends ConsumerWidget {
     final l10n = AppLocalizations.of(context)!;
     final recentlyIdentifiedAsync = ref.watch(recentlyIdentifiedProvider);
     final trendingAsync = ref.watch(trendingPlantsProvider);
+
+    final currentUser = ref.watch(currentUserProvider);
+    final displayName =
+        currentUser?.userMetadata?['full_name'] ?? l10n.defaultUsername;
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -28,23 +34,42 @@ class HomePage extends ConsumerWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      const CircleAvatar(
-                        radius: 24,
-                        // backgroundImage: AssetImage('assets/avatar.png'),
-                        backgroundColor: AppColors.accent,
-                        child: Icon(Icons.person, color: AppColors.primary),
-                      ),
-                      const SizedBox(width: 12),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                  InkWell(
+                    onTap: () {
+                      if (currentUser == null) {
+                        context.push('/login');
+                      }
+                      // Maybe navigate to profile if logged in?
+                    },
+                    borderRadius: BorderRadius.circular(12),
+                    child: Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Row(
                         children: [
-                          Text(l10n.greeting, style: AppTextStyles.bodyMedium),
-                          Text(l10n.userName, style: AppTextStyles.h2),
+                          const CircleAvatar(
+                            radius: 24,
+                            backgroundImage: AssetImage(
+                              'assets/images/user_avatar.png',
+                            ),
+                            backgroundColor: AppColors.accent,
+                          ),
+                          const SizedBox(width: 12),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                l10n.greeting,
+                                style: AppTextStyles.bodyMedium,
+                              ),
+                              Text(
+                                displayName, // Dynamic username
+                                style: AppTextStyles.h2,
+                              ),
+                            ],
+                          ),
                         ],
                       ),
-                    ],
+                    ),
                   ),
                   Row(
                     children: [
