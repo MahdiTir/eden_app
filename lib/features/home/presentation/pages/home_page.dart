@@ -37,40 +37,45 @@ class HomePage extends ConsumerWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  InkWell(
-                    onTap: () {
-                      if (currentUser == null) {
-                        context.push('/login');
-                      }
-                      // Maybe navigate to profile if logged in?
-                    },
-                    borderRadius: BorderRadius.circular(12),
-                    child: Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Row(
-                        children: [
-                          const CircleAvatar(
-                            radius: 24,
-                            backgroundImage: AssetImage(
-                              'assets/images/user_avatar.png',
+                  Expanded(
+                    child: InkWell(
+                      onTap: () {
+                        if (currentUser == null) {
+                          context.push('/login');
+                        }
+                        // Maybe navigate to profile if logged in?
+                      },
+                      borderRadius: BorderRadius.circular(12),
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Row(
+                          children: [
+                            const CircleAvatar(
+                              radius: 24,
+                              backgroundImage: AssetImage(
+                                'assets/images/user_avatar.png',
+                              ),
+                              backgroundColor: AppColors.accent,
                             ),
-                            backgroundColor: AppColors.accent,
-                          ),
-                          const SizedBox(width: 12),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                l10n.greeting,
-                                style: AppTextStyles.bodyMedium,
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    l10n.greeting,
+                                    style: AppTextStyles.bodyMedium,
+                                  ),
+                                  Text(
+                                    displayName, // Dynamic username
+                                    style: AppTextStyles.h2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ],
                               ),
-                              Text(
-                                displayName, // Dynamic username
-                                style: AppTextStyles.h2,
-                              ),
-                            ],
-                          ),
-                        ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),

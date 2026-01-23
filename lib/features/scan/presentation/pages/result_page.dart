@@ -6,22 +6,20 @@ import 'package:eden_app/core/theme/app_text_styles.dart';
 import 'package:eden_app/l10n/app_localizations.dart';
 import '../../../../core/services/plant_classifier_service.dart';
 
-class ResultPage extends StatelessWidget {
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:eden_app/features/scan/presentation/providers/scan_provider.dart';
+
+class ResultPage extends ConsumerWidget {
   final File image;
   final List<PredictionResult> results;
 
   const ResultPage({super.key, required this.image, required this.results});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context)!;
     final topPrediction = results.isNotEmpty ? results.first : null;
-
-    // As per user request: "for the online model just show the top prediction"
-    // "result shown through a dedicated screen which show the picture token with the result and the confidence"
-    // "top prediction only also for offline" -> so we just show top prediction primarily.
-    // But keeping others in a small list might be nice if strict "only" means singular.
-    // User comment: "top prediction only also for offline". Okay, so only show the winner.
+    final isOnline = ref.watch(scanModeProvider);
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -135,6 +133,41 @@ class ResultPage extends StatelessWidget {
                           ],
                         ),
                       ),
+                      const SizedBox(height: 32),
+                      SizedBox(
+                        width: double.infinity,
+                        height: 56,
+                        child: ElevatedButton.icon(
+                          onPressed: !isOnline
+                              ? null
+                              : () {
+                                  context.push(
+                                    Uri(
+                                      path:
+                                          '/plant-profile/${topPrediction.label}',
+                                      queryParameters: {'imageUrl': image.path},
+                                    ).toString(),
+                                  );
+                                },
+                          icon: Icon(
+                            isOnline ? Icons.info_outline : Icons.wifi_off,
+                          ),
+                          label: Text(
+                            isOnline
+                                ? 'View Plant Profile'
+                                : 'Offline Mode: Profile unavailable',
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: isOnline
+                                ? AppColors.primary
+                                : Colors.grey,
+                            foregroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                          ),
+                        ),
+                      ),
                     ] else ...[
                       Center(
                         child: Text(
@@ -146,6 +179,7 @@ class ResultPage extends StatelessWidget {
                   ],
                 ),
               ),
+              const SizedBox(height: 40),
             ],
           ),
         ),

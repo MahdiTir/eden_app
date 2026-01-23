@@ -7,6 +7,7 @@ import '../../features/auth/presentation/pages/login_page.dart';
 import '../../features/auth/presentation/pages/signup_page.dart';
 import '../../features/scan/presentation/pages/scan_page.dart';
 import '../../features/scan/presentation/pages/result_page.dart';
+import '../../features/plant_profile/presentation/pages/plant_profile_screen.dart';
 import 'dart:io';
 import '../../core/services/plant_classifier_service.dart';
 
@@ -23,6 +24,14 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(path: '/home', builder: (context, state) => const HomePage()),
       GoRoute(path: '/login', builder: (context, state) => const LoginPage()),
       GoRoute(path: '/signup', builder: (context, state) => const SignUpPage()),
+      GoRoute(
+        path: '/plant-profile/:name',
+        builder: (context, state) {
+          final name = state.pathParameters['name']!;
+          final imageUrl = state.uri.queryParameters['imageUrl'];
+          return PlantProfileScreen(plantName: name, imageUrl: imageUrl);
+        },
+      ),
       GoRoute(
         path: '/scan',
         builder: (context, state) => const ScanPage(),

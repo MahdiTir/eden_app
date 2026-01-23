@@ -41,19 +41,6 @@ class _ScanPageState extends ConsumerState<ScanPage> {
     await ref
         .read(scanControllerProvider.notifier)
         .identifyPlant(_selectedImage!);
-
-    // Check for success and navigate
-    // Note: We should probably listen to the state in build or here.
-    // With AsyncNotifier, we can check value.
-    if (mounted) {
-      final state = ref.read(scanControllerProvider);
-      if (!state.hasError && state.hasValue) {
-        context.push(
-          '/scan/result',
-          extra: {'image': _selectedImage, 'results': state.value},
-        );
-      }
-    }
   }
 
   @override
@@ -135,7 +122,7 @@ class _ScanPageState extends ConsumerState<ScanPage> {
                           child: Stack(
                             fit: StackFit.expand,
                             children: [
-                              Image.file(_selectedImage!, fit: BoxFit.cover),
+                              Image.file(_selectedImage!, fit: BoxFit.contain),
                               Positioned(
                                 top: 16,
                                 right: 16,
