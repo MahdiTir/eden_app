@@ -16,7 +16,7 @@ class QuizRepository {
           question_id,
           quiz_id,
           correct_plant_id,
-          plant_dataset_images!dataset_image_id (
+          plant_dataset_images (
             image_url,
             plant_id
           )
@@ -29,7 +29,7 @@ class QuizRepository {
       final questionId = q['question_id'].toString();
       final correctPlantId = q['correct_plant_id'].toString();
       final datasetImage = q['plant_dataset_images'] as Map<String, dynamic>?;
-      final imageUrl = datasetImage?['image_url'] as String? ?? '';
+      final imageUrl = datasetImage?['image_url']?.toString() ?? '';
 
       // Fetch 5 random plant options including the correct one
       final plantsResult = await _supabase
