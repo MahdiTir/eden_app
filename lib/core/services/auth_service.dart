@@ -30,6 +30,7 @@ class AuthService {
         await _updatePublicUser(response.user!.id, fullName);
       } catch (e) {
         // Ignore RLS errors here, trust the trigger
+        // ignore: avoid_print
         print(
           'Manual public user update failed (likely RLS or Trigger handled it): $e',
         );
@@ -67,6 +68,7 @@ class AuthService {
       // If the trigger hasn't fired yet or row doesn't exist, we might need to wait or handle it.
       // However, usually triggers are immediate.
       // If it fails, we might want to retry or log it.
+      // ignore: avoid_print
       print('Error updating public user: $e');
       rethrow;
     }

@@ -177,4 +177,50 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get defaultUsername => 'Utilisateur';
+
+  @override
+  String get scanPlant => 'Scanner la Plante';
+
+  @override
+  String get camera => 'Caméra';
+
+  @override
+  String get gallery => 'Galerie';
+
+  @override
+  String get identify => 'Identifier';
+
+  @override
+  String get onlineMode => 'Mode En Ligne';
+
+  @override
+  String get offlineMode => 'Mode Hors Ligne';
+
+  @override
+  String get noInternet => 'Pas de Connexion Internet';
+
+  @override
+  String get noInternetMessage =>
+      'Veuillez vous connecter à Internet pour utiliser le mode en ligne.';
+
+  @override
+  String get unknownPlant => 'Plante Inconnue';
+
+  @override
+  String get confidence => 'Confiance';
+
+  @override
+  String get noImageSelected => 'Aucune image sélectionnée';
+
+  @override
+  String get identificationFailed => 'Échec de l\'identification';
+
+  @override
+  String get results => 'Résultats';
+
+  @override
+  String get topPrediction => 'Meilleure Prédiction';
+
+  @override
+  String get otherPredictions => 'Autres Prédictions';
 }

@@ -48,10 +48,8 @@ class _SplashPageState extends ConsumerState<SplashPage>
 
     // ignore: unused_local_variable
     final prefs = ref.read(sharedPreferencesProvider);
-    //final onboardingSeen = prefs.getBool(StorageKeys.onboardingSeen) ?? false;
-    final onboardingSeen = false;
+    final onboardingSeen = prefs.getBool(StorageKeys.onboardingSeen) ?? false;
 
-    // ignore: dead_code
     if (onboardingSeen) {
       context.go('/home');
     } else {

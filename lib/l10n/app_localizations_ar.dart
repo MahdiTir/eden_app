@@ -177,4 +177,50 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get defaultUsername => 'مستخدم';
+
+  @override
+  String get scanPlant => 'مسح النبات';
+
+  @override
+  String get camera => 'الكاميرا';
+
+  @override
+  String get gallery => 'المعرض';
+
+  @override
+  String get identify => 'تعرف على النبات';
+
+  @override
+  String get onlineMode => 'وضع متصل';
+
+  @override
+  String get offlineMode => 'وضع غير متصل';
+
+  @override
+  String get noInternet => 'لا يتوفر اتصال بالإنترنت';
+
+  @override
+  String get noInternetMessage =>
+      'يرجى الاتصال بالإنترنت لاستخدام الوضع المتصل.';
+
+  @override
+  String get unknownPlant => 'نبات غير معروف';
+
+  @override
+  String get confidence => 'الثقة';
+
+  @override
+  String get noImageSelected => 'لم يتم اختيار صورة';
+
+  @override
+  String get identificationFailed => 'فشل التعرف';
+
+  @override
+  String get results => 'النتائج';
+
+  @override
+  String get topPrediction => 'أفضل توقع';
+
+  @override
+  String get otherPredictions => 'توقعات أخرى';
 }

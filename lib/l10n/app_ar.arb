@@ -54,5 +54,20 @@
   "confirmPassword": "تأكيد كلمة المرور",
   "createAccount": "إنشاء حساب",
   "orContinueWith": "أو تابع باستخدام",
-  "defaultUsername": "مستخدم"
+  "defaultUsername": "مستخدم",
+  "scanPlant": "مسح النبات",
+  "camera": "الكاميرا",
+  "gallery": "المعرض",
+  "identify": "تعرف على النبات",
+  "onlineMode": "وضع متصل",
+  "offlineMode": "وضع غير متصل",
+  "noInternet": "لا يتوفر اتصال بالإنترنت",
+  "noInternetMessage": "يرجى الاتصال بالإنترنت لاستخدام الوضع المتصل.",
+  "unknownPlant": "نبات غير معروف",
+  "confidence": "الثقة",
+  "noImageSelected": "لم يتم اختيار صورة",
+  "identificationFailed": "فشل التعرف",
+  "results": "النتائج",
+  "topPrediction": "أفضل توقع",
+  "otherPredictions": "توقعات أخرى"
 }

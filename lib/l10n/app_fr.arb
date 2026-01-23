@@ -54,5 +54,20 @@
   "confirmPassword": "Confirmer le mot de passe",
   "createAccount": "Créer un compte",
   "orContinueWith": "Ou continuer avec",
-  "defaultUsername": "Utilisateur"
+  "defaultUsername": "Utilisateur",
+  "scanPlant": "Scanner la Plante",
+  "camera": "Caméra",
+  "gallery": "Galerie",
+  "identify": "Identifier",
+  "onlineMode": "Mode En Ligne",
+  "offlineMode": "Mode Hors Ligne",
+  "noInternet": "Pas de Connexion Internet",
+  "noInternetMessage": "Veuillez vous connecter à Internet pour utiliser le mode en ligne.",
+  "unknownPlant": "Plante Inconnue",
+  "confidence": "Confiance",
+  "noImageSelected": "Aucune image sélectionnée",
+  "identificationFailed": "Échec de l'identification",
+  "results": "Résultats",
+  "topPrediction": "Meilleure Prédiction",
+  "otherPredictions": "Autres Prédictions"
 }

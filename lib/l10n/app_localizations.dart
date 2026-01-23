@@ -423,6 +423,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'User'**
   String get defaultUsername;
+
+  /// No description provided for @scanPlant.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan Plant'**
+  String get scanPlant;
+
+  /// No description provided for @camera.
+  ///
+  /// In en, this message translates to:
+  /// **'Camera'**
+  String get camera;
+
+  /// No description provided for @gallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Gallery'**
+  String get gallery;
+
+  /// No description provided for @identify.
+  ///
+  /// In en, this message translates to:
+  /// **'Identify'**
+  String get identify;
+
+  /// No description provided for @onlineMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Online Mode'**
+  String get onlineMode;
+
+  /// No description provided for @offlineMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Offline Mode'**
+  String get offlineMode;
+
+  /// No description provided for @noInternet.
+  ///
+  /// In en, this message translates to:
+  /// **'No Internet Connection'**
+  String get noInternet;
+
+  /// No description provided for @noInternetMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Please connect to the internet to use online mode.'**
+  String get noInternetMessage;
+
+  /// No description provided for @unknownPlant.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown Plant'**
+  String get unknownPlant;
+
+  /// No description provided for @confidence.
+  ///
+  /// In en, this message translates to:
+  /// **'Confidence'**
+  String get confidence;
+
+  /// No description provided for @noImageSelected.
+  ///
+  /// In en, this message translates to:
+  /// **'No image selected'**
+  String get noImageSelected;
+
+  /// No description provided for @identificationFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Identification Failed'**
+  String get identificationFailed;
+
+  /// No description provided for @results.
+  ///
+  /// In en, this message translates to:
+  /// **'Results'**
+  String get results;
+
+  /// No description provided for @topPrediction.
+  ///
+  /// In en, this message translates to:
+  /// **'Top Prediction'**
+  String get topPrediction;
+
+  /// No description provided for @otherPredictions.
+  ///
+  /// In en, this message translates to:
+  /// **'Other Predictions'**
+  String get otherPredictions;
 }
 
 class _AppLocalizationsDelegate

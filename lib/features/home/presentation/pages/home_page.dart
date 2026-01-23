@@ -8,6 +8,8 @@ import '../../../../core/widgets/settings_bottom_sheet.dart';
 import '../../data/models/plant_model.dart';
 import '../../../auth/presentation/providers/auth_provider.dart';
 import '../providers/home_provider.dart';
+import '../../../scan/presentation/providers/scan_provider.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -19,6 +21,7 @@ class HomePage extends ConsumerWidget {
     final trendingAsync = ref.watch(trendingPlantsProvider);
 
     final currentUser = ref.watch(currentUserProvider);
+    final isOnline = ref.watch(scanModeProvider);
     final displayName =
         currentUser?.userMetadata?['full_name'] ?? l10n.defaultUsername;
 
@@ -73,6 +76,47 @@ class HomePage extends ConsumerWidget {
                   ),
                   Row(
                     children: [
+                      // Mode Toggle
+                      IconButton(
+                        onPressed: () async {
+                          if (!isOnline) {
+                            // Switching to Online: Check connectivity
+                            final connectivityResult = await Connectivity()
+                                .checkConnectivity();
+                            if (connectivityResult.contains(
+                              ConnectivityResult.none,
+                            )) {
+                              if (context.mounted) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(l10n.noInternetMessage),
+                                    action: SnackBarAction(
+                                      label: 'Settings',
+                                      onPressed: () {
+                                        // Open settings if possible, or just dismiss
+                                      },
+                                    ),
+                                  ),
+                                );
+                              }
+                              return;
+                            }
+                            // If user clicked, maybe show a confirmation or just switch?
+                            // User request: "a message is shown to indicate him to access internet if he want to switch to online mode"
+                            // This implies sticking to offline if no internet.
+                            ref.read(scanModeProvider.notifier).setMode(true);
+                          } else {
+                            // Switching to Offline
+                            ref.read(scanModeProvider.notifier).setMode(false);
+                          }
+                        },
+                        icon: Icon(
+                          isOnline ? Icons.wifi : Icons.wifi_off,
+                          size: 26,
+                          color: isOnline ? AppColors.primary : Colors.grey,
+                        ),
+                        tooltip: isOnline ? l10n.onlineMode : l10n.offlineMode,
+                      ),
                       IconButton(
                         onPressed: () {
                           showModalBottomSheet(
@@ -259,26 +303,29 @@ class HomePage extends ConsumerWidget {
             ),
 
             // Scan Button (Floating style) - Bigger
-            Container(
-              height: 72, // Bigger
-              width: 72, // Bigger
-              margin: const EdgeInsets.only(bottom: 12),
-              decoration: BoxDecoration(
-                color: AppColors.secondary,
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.secondary.withValues(alpha: 0.4),
-                    blurRadius: 16,
-                    offset: const Offset(0, 8),
-                  ),
-                ],
-                shape: BoxShape.circle,
-                border: Border.all(color: Colors.white, width: 4),
-              ),
-              child: const Icon(
-                Icons.qr_code_scanner,
-                color: Colors.white,
-                size: 32,
+            GestureDetector(
+              onTap: () => context.push('/scan'),
+              child: Container(
+                height: 72, // Bigger
+                width: 72, // Bigger
+                margin: const EdgeInsets.only(bottom: 12),
+                decoration: BoxDecoration(
+                  color: AppColors.secondary,
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.secondary.withValues(alpha: 0.4),
+                      blurRadius: 16,
+                      offset: const Offset(0, 8),
+                    ),
+                  ],
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.white, width: 4),
+                ),
+                child: const Icon(
+                  Icons.qr_code_scanner,
+                  color: Colors.white,
+                  size: 32,
+                ),
               ),
             ),
 

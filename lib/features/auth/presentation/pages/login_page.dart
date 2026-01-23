@@ -336,9 +336,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     Align(
                       alignment: Alignment.centerRight,
                       child: TextButton(
-                        onPressed: () {
-                          // TODO: Implement forgot password
-                        },
+                        onPressed: () {},
                         child: Text(
                           l10n.forgotPassword,
                           style: const TextStyle(

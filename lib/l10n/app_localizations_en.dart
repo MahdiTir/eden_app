@@ -177,4 +177,50 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get defaultUsername => 'User';
+
+  @override
+  String get scanPlant => 'Scan Plant';
+
+  @override
+  String get camera => 'Camera';
+
+  @override
+  String get gallery => 'Gallery';
+
+  @override
+  String get identify => 'Identify';
+
+  @override
+  String get onlineMode => 'Online Mode';
+
+  @override
+  String get offlineMode => 'Offline Mode';
+
+  @override
+  String get noInternet => 'No Internet Connection';
+
+  @override
+  String get noInternetMessage =>
+      'Please connect to the internet to use online mode.';
+
+  @override
+  String get unknownPlant => 'Unknown Plant';
+
+  @override
+  String get confidence => 'Confidence';
+
+  @override
+  String get noImageSelected => 'No image selected';
+
+  @override
+  String get identificationFailed => 'Identification Failed';
+
+  @override
+  String get results => 'Results';
+
+  @override
+  String get topPrediction => 'Top Prediction';
+
+  @override
+  String get otherPredictions => 'Other Predictions';
 }
