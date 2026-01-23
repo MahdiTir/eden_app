@@ -334,8 +334,16 @@ class HomePage extends ConsumerWidget {
               ),
             ),
 
-            _BottomNavItem(icon: Icons.eco_outlined, label: l10n.navMyGarden),
-            _BottomNavItem(icon: Icons.quiz_outlined, label: l10n.navQuiz),
+            _BottomNavItem(
+              icon: Icons.eco_outlined,
+              label: l10n.navMyGarden,
+              onTap: () => context.push('/garden'),
+            ),
+            _BottomNavItem(
+              icon: Icons.quiz_outlined,
+              label: l10n.navQuiz,
+              onTap: () => context.push('/quiz'),
+            ),
           ],
         ),
       ),
@@ -348,32 +356,41 @@ class _BottomNavItem extends StatelessWidget {
   final String label;
   final bool isActive;
   final Color? color;
+  final VoidCallback? onTap;
 
   const _BottomNavItem({
     required this.icon,
     required this.label,
     this.isActive = false,
     this.color,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     final itemColor = isActive ? (color ?? AppColors.secondary) : Colors.grey;
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(icon, color: itemColor),
-        const SizedBox(height: 4),
-        Text(
-          label,
-          style: TextStyle(
-            color: itemColor,
-            fontSize: 10,
-            fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
-          ),
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(12),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, color: itemColor),
+            const SizedBox(height: 4),
+            Text(
+              label,
+              style: TextStyle(
+                color: itemColor,
+                fontSize: 10,
+                fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+              ),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }
