@@ -6,7 +6,6 @@ import '../../../../core/theme/app_text_styles.dart';
 import '../../../auth/presentation/providers/auth_provider.dart';
 import '../../data/models/quiz_models.dart';
 import '../providers/quiz_provider.dart';
-import 'quiz_results_page.dart';
 
 class QuizPage extends ConsumerStatefulWidget {
   const QuizPage({super.key});
@@ -218,7 +217,7 @@ class _QuizContentState extends ConsumerState<_QuizContent> {
         xpEarned: xpEarned,
         streak: session.streak,
         onContinue: () {
-          Navigator.pop(context);
+          context.pop();
           if (session.isLastQuestion) {
             _showResults();
           } else {
@@ -236,12 +235,7 @@ class _QuizContentState extends ConsumerState<_QuizContent> {
           .completeQuiz();
 
       if (mounted) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => QuizResultsPage(result: result),
-          ),
-        );
+        context.pushReplacement('/quiz/results', extra: result);
       }
     } catch (e) {
       if (mounted) {
@@ -261,7 +255,7 @@ class _QuizContentState extends ConsumerState<_QuizContent> {
         content: const Text('Your progress will be lost if you exit now.'),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => context.pop(),
             child: Text(
               'Continue',
               style: TextStyle(color: AppColors.textSecondary),
@@ -269,7 +263,7 @@ class _QuizContentState extends ConsumerState<_QuizContent> {
           ),
           ElevatedButton(
             onPressed: () {
-              Navigator.pop(context);
+              context.pop();
               ref.read(quizSessionProvider.notifier).reset();
               context.pop();
             },
@@ -519,23 +513,34 @@ class _QuizContentState extends ConsumerState<_QuizContent> {
                       ),
                     );
                   },
-                  errorBuilder: (context, error, stackTrace) => Container(
-                    color: AppColors.accent,
-                    child: const Icon(
-                      Icons.eco,
-                      size: 80,
-                      color: AppColors.secondary,
-                    ),
-                  ),
+                  errorBuilder: (context, error, stackTrace) {
+                    // Use mock assets as fallbacks if network fails
+                    final mockAssets = [
+                      'assets/images/oleander.png',
+                      'assets/images/olive_tree.png',
+                      'assets/images/mentha.png',
+                      'assets/images/deglet_nour.png',
+                      'assets/images/barbary_fig.png',
+                      'assets/images/atlas_cedar.png',
+                      'assets/images/lavender.jpg',
+                      'assets/images/rosemary.jpg',
+                      'assets/images/hibiscus.jpg',
+                      'assets/images/jasmine.jpg',
+                    ];
+                    // Use questionId hash or similar to pick a stable mock image for this question session
+                    final assetIndex =
+                        question.questionId.hashCode.abs() % mockAssets.length;
+                    return Image.asset(
+                      mockAssets[assetIndex],
+                      fit: BoxFit.cover,
+                    );
+                  },
                 )
               else
-                Container(
-                  color: AppColors.accent,
-                  child: const Icon(
-                    Icons.eco,
-                    size: 80,
-                    color: AppColors.secondary,
-                  ),
+                Image.asset(
+                  // Use a default mock image
+                  'assets/images/oleander.png',
+                  fit: BoxFit.cover,
                 ),
               Container(
                 decoration: BoxDecoration(

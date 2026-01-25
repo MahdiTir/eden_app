@@ -10,6 +10,8 @@ import '../../features/scan/presentation/pages/result_page.dart';
 import '../../features/plant_profile/presentation/pages/plant_profile_screen.dart';
 import '../../features/garden/presentation/pages/garden_page.dart';
 import '../../features/quiz/presentation/pages/quiz_page.dart';
+import '../../features/quiz/presentation/pages/quiz_results_page.dart';
+import '../../features/quiz/data/models/quiz_models.dart';
 import 'dart:io';
 import '../../core/services/plant_classifier_service.dart';
 
@@ -27,7 +29,19 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(path: '/login', builder: (context, state) => const LoginPage()),
       GoRoute(path: '/signup', builder: (context, state) => const SignUpPage()),
       GoRoute(path: '/garden', builder: (context, state) => const GardenPage()),
-      GoRoute(path: '/quiz', builder: (context, state) => const QuizPage()),
+      GoRoute(
+        path: '/quiz',
+        builder: (context, state) => const QuizPage(),
+        routes: [
+          GoRoute(
+            path: 'results',
+            builder: (context, state) {
+              final result = state.extra as QuizResult;
+              return QuizResultsPage(result: result);
+            },
+          ),
+        ],
+      ),
       GoRoute(
         path: '/plant-profile/:name',
         builder: (context, state) {

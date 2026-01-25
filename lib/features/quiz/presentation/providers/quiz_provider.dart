@@ -126,10 +126,13 @@ class QuizSessionNotifier extends Notifier<QuizSession?> {
           correctAnswers: result.correctAnswers,
           totalQuestions: result.totalQuestions,
         );
+
+        // Also save the summary/attempt
+        await repository.saveQuizSummary(userId: user.id, result: result);
       } catch (e) {
         // Log error but still return result
         // ignore: avoid_print
-        print('Failed to award XP: $e');
+        print('Failed to save quiz results: $e');
       }
     }
 

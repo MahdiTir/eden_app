@@ -427,7 +427,7 @@ class _PlantCard extends StatelessWidget {
                   top: Radius.circular(16),
                 ),
                 image: DecorationImage(
-                  image: NetworkImage(plant.imageUrl),
+                  image: AssetImage(plant.imageUrl),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -506,7 +506,7 @@ class _TrendingPlantCard extends StatelessWidget {
                 left: Radius.circular(16),
               ),
               image: DecorationImage(
-                image: NetworkImage(plant.imageUrl),
+                image: AssetImage(plant.imageUrl),
                 fit: BoxFit.cover,
               ),
             ),

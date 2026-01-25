@@ -133,6 +133,8 @@ class _PlantProfileScreenState extends ConsumerState<PlantProfileScreen> {
             if (widget.imageUrl != null && widget.imageUrl!.isNotEmpty)
               widget.imageUrl!.startsWith('http')
                   ? Image.network(widget.imageUrl!, fit: BoxFit.cover)
+                  : widget.imageUrl!.startsWith('assets/')
+                  ? Image.asset(widget.imageUrl!, fit: BoxFit.cover)
                   : (File(widget.imageUrl!).existsSync()
                         ? Image.file(File(widget.imageUrl!), fit: BoxFit.cover)
                         : Image.network(

@@ -9,64 +9,99 @@ class QuizRepository {
 
   /// Fetch quiz questions with plant options
   Future<List<QuizQuestion>> getQuizQuestions({int limit = 5}) async {
-    // Fetch random quiz questions with their images and correct plant
+    // 1. Fetch random quiz questions with their images and correct plant
+    // Note: To get true random, an RPC or custom query is better,
+    // but we'll stick to a basic selection for now.
     final questionsResult = await _supabase
         .from('quiz_questions')
         .select('''
-          question_id,
-          quiz_id,
-          correct_plant_id,
+          *,
           plant_dataset_images (
-            image_url,
-            plant_id
+            *
           )
         ''')
         .limit(limit);
 
+    final questionsData = questionsResult as List;
+    if (questionsData.isEmpty) {
+      return [];
+    }
+
+    // 2. Fetch a pool of plants to use as wrong options (efficient: fetch once)
+    final plantsResult = await _supabase
+        .from('plants')
+        .select('plant_id, scientific_name, common_name')
+        .limit(50); // Get a good pool
+
+    final allPlantsPool = (plantsResult as List)
+        .map((p) => PlantOption.fromJson(p as Map<String, dynamic>))
+        .toList();
+
     final questions = <QuizQuestion>[];
 
-    for (final q in questionsResult as List) {
+    for (final q in questionsData) {
       final questionId = q['question_id'].toString();
       final correctPlantId = q['correct_plant_id'].toString();
-      final datasetImage = q['plant_dataset_images'] as Map<String, dynamic>?;
-      final imageUrl = datasetImage?['image_url']?.toString() ?? '';
+      final datasetImage =
+          q['plant_dataset_images'] ?? q['plant_dataset_image'];
 
-      // Fetch 5 random plant options including the correct one
-      final plantsResult = await _supabase
-          .from('plants')
-          .select('plant_id, scientific_name, common_name')
-          .limit(10);
+      // Handle various response types for joined images
+      String imageUrl =
+          q['image_url']?.toString() ?? ''; // Fallback to direct field
 
-      // Make sure correct plant is included
-      var options = (plantsResult as List)
-          .map((p) => PlantOption.fromJson(p as Map<String, dynamic>))
+      if (imageUrl.isEmpty) {
+        if (datasetImage is Map) {
+          imageUrl =
+              datasetImage['image_url']?.toString() ??
+              datasetImage['url']?.toString() ??
+              datasetImage['image']?.toString() ??
+              '';
+        } else if (datasetImage is List && datasetImage.isNotEmpty) {
+          final firstImage = datasetImage[0];
+          if (firstImage is Map) {
+            imageUrl =
+                firstImage['image_url']?.toString() ??
+                firstImage['url']?.toString() ??
+                firstImage['image']?.toString() ??
+                '';
+          }
+        }
+      }
+
+      // If still empty, we can't show an image, but we'll try to get it from correct plant's dataset if needed
+      // but usually the join should suffice.
+
+      // 3. Create options for this question
+      var options = <PlantOption>[];
+
+      // Ensure correct plant is included
+      final correctFromPool = allPlantsPool
+          .where((o) => o.plantId == correctPlantId)
           .toList();
-
-      // Ensure correct plant is in options
-      final hasCorrect = options.any((o) => o.plantId == correctPlantId);
-      if (!hasCorrect) {
-        final correctPlantResult = await _supabase
-            .from('plants')
-            .select('plant_id, scientific_name, common_name')
-            .eq('plant_id', correctPlantId)
-            .single();
-        options.insert(0, PlantOption.fromJson(correctPlantResult));
+      if (correctFromPool.isNotEmpty) {
+        options.add(correctFromPool.first);
+      } else {
+        // Fallback: fetch correct plant if not in pool
+        try {
+          final correctPlantResult = await _supabase
+              .from('plants')
+              .select('plant_id, scientific_name, common_name')
+              .eq('plant_id', correctPlantId)
+              .single();
+          options.add(PlantOption.fromJson(correctPlantResult));
+        } catch (e) {
+          // If we can'd find the correct plant, skip this question or add a placeholder
+          continue;
+        }
       }
 
-      // Take only 5 options and shuffle
+      // Add wrong options from pool
+      final wrongOptions =
+          allPlantsPool.where((o) => o.plantId != correctPlantId).toList()
+            ..shuffle();
+
+      options.addAll(wrongOptions.take(4));
       options.shuffle();
-      if (options.length > 5) {
-        // Make sure correct answer is kept
-        final correctOption = options.firstWhere(
-          (o) => o.plantId == correctPlantId,
-        );
-        options = options
-            .where((o) => o.plantId != correctPlantId)
-            .take(4)
-            .toList();
-        options.add(correctOption);
-        options.shuffle();
-      }
 
       questions.add(
         QuizQuestion(
@@ -75,7 +110,7 @@ class QuizRepository {
           imageUrl: imageUrl,
           correctPlantId: correctPlantId,
           options: options,
-          hint: 'Identify this plant species',
+          hint: 'Identify this plant species native to Algeria.',
         ),
       );
     }
@@ -96,6 +131,28 @@ class QuizRepository {
       'selected_plant_id': selectedPlantId,
       'is_correct': isCorrect,
     });
+  }
+
+  /// Save the final quiz result/summary
+  Future<void> saveQuizSummary({
+    required String userId,
+    required QuizResult result,
+  }) async {
+    await _supabase
+        .from('quiz_attempts')
+        .insert({
+          'user_id': userId,
+          'correct_answers': result.correctAnswers,
+          'total_questions': result.totalQuestions,
+          'xp_earned': result.totalXpEarned,
+          'time_taken_seconds': result.timeTaken.inSeconds,
+          'accuracy': result.accuracy,
+        })
+        .catchError((e) {
+          // If table doesn't exist, we fallback to just xp_history which we already do
+          // ignore: avoid_print
+          print('quiz_attempts table might not exist: $e');
+        });
   }
 
   /// Award XP for quiz completion (calls server-side logic)

@@ -37,7 +37,7 @@ class PlantClassifierService {
 
   // Supabase Edge Function URL
   static const String _onlineApiUrl =
-      'https://ptyyqdgbvigvzthsqtmw.supabase.co/functions/v1/suba_to_HF';
+      'https://ptyyqdgbvigvzthsqtmw.supabase.co/functions/v1/spices_supabase_to_hf';
 
   // Initialize the model (Offline)
   Future<void> loadModel() async {
