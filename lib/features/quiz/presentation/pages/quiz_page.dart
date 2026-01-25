@@ -483,7 +483,7 @@ class _QuizContentState extends ConsumerState<_QuizContent> {
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.1),
+              color: Colors.black.withValues(alpha: 0.1),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
@@ -547,7 +547,10 @@ class _QuizContentState extends ConsumerState<_QuizContent> {
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    colors: [Colors.transparent, Colors.black.withOpacity(0.2)],
+                    colors: [
+                      Colors.transparent,
+                      Colors.black.withValues(alpha: 0.2),
+                    ],
                   ),
                 ),
               ),
@@ -575,16 +578,16 @@ class _QuizContentState extends ConsumerState<_QuizContent> {
     if (hasAnswered) {
       if (isCorrectOption) {
         borderColor = AppColors.secondary;
-        backgroundColor = AppColors.secondary.withOpacity(0.1);
+        backgroundColor = AppColors.secondary.withValues(alpha: 0.1);
         radioColor = AppColors.secondary;
       } else if (isSelected && !isCorrectOption) {
         borderColor = AppColors.error;
-        backgroundColor = AppColors.error.withOpacity(0.05);
+        backgroundColor = AppColors.error.withValues(alpha: 0.05);
         radioColor = AppColors.error;
       }
     } else if (isSelected) {
       borderColor = AppColors.secondary;
-      backgroundColor = AppColors.secondary.withOpacity(0.05);
+      backgroundColor = AppColors.secondary.withValues(alpha: 0.05);
       radioColor = AppColors.secondary;
     }
 
@@ -601,7 +604,7 @@ class _QuizContentState extends ConsumerState<_QuizContent> {
             border: Border.all(color: borderColor, width: 2),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.03),
+                color: Colors.black.withValues(alpha: 0.03),
                 blurRadius: 8,
                 offset: const Offset(0, 2),
               ),
@@ -683,7 +686,7 @@ class _QuizContentState extends ConsumerState<_QuizContent> {
         color: AppColors.background,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 10,
             offset: const Offset(0, -5),
           ),
@@ -721,7 +724,7 @@ class _QuizContentState extends ConsumerState<_QuizContent> {
                     borderRadius: BorderRadius.circular(16),
                   ),
                   elevation: canSubmit ? 4 : 0,
-                  shadowColor: AppColors.secondary.withOpacity(0.3),
+                  shadowColor: AppColors.secondary.withValues(alpha: 0.3),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -768,8 +771,8 @@ class _AnswerFeedbackSheet extends StatelessWidget {
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: isCorrect
-            ? AppColors.secondary.withOpacity(0.95)
-            : AppColors.error.withOpacity(0.95),
+            ? AppColors.secondary.withValues(alpha: 0.95)
+            : AppColors.error.withValues(alpha: 0.95),
         borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
       ),
       child: Column(
@@ -779,7 +782,7 @@ class _AnswerFeedbackSheet extends StatelessWidget {
             width: 40,
             height: 4,
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.3),
+              color: Colors.white.withValues(alpha: 0.3),
               borderRadius: BorderRadius.circular(2),
             ),
           ),
@@ -788,7 +791,7 @@ class _AnswerFeedbackSheet extends StatelessWidget {
             width: 72,
             height: 72,
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.2),
+              color: Colors.white.withValues(alpha: 0.2),
               shape: BoxShape.circle,
             ),
             child: Icon(

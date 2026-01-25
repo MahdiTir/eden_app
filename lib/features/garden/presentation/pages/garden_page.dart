@@ -209,7 +209,7 @@ class _GardenContentState extends ConsumerState<_GardenContent> {
         Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: color.withOpacity(0.1),
+            color: color.withValues(alpha: 0.1),
             shape: BoxShape.circle,
           ),
           child: Icon(icon, color: color, size: 28),
@@ -349,7 +349,7 @@ class _GardenContentState extends ConsumerState<_GardenContent> {
           border: Border.all(color: Colors.grey.shade200),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.03),
+              color: Colors.black.withValues(alpha: 0.03),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -383,7 +383,7 @@ class _GardenContentState extends ConsumerState<_GardenContent> {
           border: Border.all(color: Colors.grey.shade200),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.03),
+              color: Colors.black.withValues(alpha: 0.03),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -537,7 +537,7 @@ class _GardenContentState extends ConsumerState<_GardenContent> {
         boxShadow: isUnlocked || isCurrent
             ? [
                 BoxShadow(
-                  color: AppColors.secondary.withOpacity(0.3),
+                  color: AppColors.secondary.withValues(alpha: 0.3),
                   blurRadius: 8,
                   offset: const Offset(0, 4),
                 ),
@@ -564,12 +564,12 @@ class _GardenContentState extends ConsumerState<_GardenContent> {
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color: isCurrent
-              ? AppColors.secondary.withOpacity(0.3)
+              ? AppColors.secondary.withValues(alpha: 0.3)
               : Colors.grey.shade200,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.03),
+            color: Colors.black.withValues(alpha: 0.03),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -627,7 +627,7 @@ class _GardenContentState extends ConsumerState<_GardenContent> {
                 minHeight: 6,
                 backgroundColor: Colors.grey.shade200,
                 valueColor: AlwaysStoppedAnimation<Color>(
-                  AppColors.secondary.withOpacity(0.5),
+                  AppColors.secondary.withValues(alpha: 0.5),
                 ),
               ),
             ),
@@ -652,7 +652,7 @@ class _GardenContentState extends ConsumerState<_GardenContent> {
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -733,7 +733,7 @@ class _GardenContentState extends ConsumerState<_GardenContent> {
             borderRadius: BorderRadius.circular(12),
           ),
           elevation: canClaim ? 4 : 0,
-          shadowColor: AppColors.secondary.withOpacity(0.3),
+          shadowColor: AppColors.secondary.withValues(alpha: 0.3),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

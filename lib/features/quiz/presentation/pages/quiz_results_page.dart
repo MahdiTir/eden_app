@@ -157,7 +157,7 @@ class QuizResultsPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(16),
                     ),
                     elevation: 4,
-                    shadowColor: AppColors.secondary.withOpacity(0.3),
+                    shadowColor: AppColors.secondary.withValues(alpha: 0.3),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
